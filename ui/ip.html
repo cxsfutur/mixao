@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>获取用户IP</title>
+</head>
+<body>
+  <div class="layui-card ip_card"  >
+    <div class="layui-card-header ">您的IP信息</div>
+    <div class="layui-card-body">
+      <table class="layui-table"  >
+        <tbody>
+          <tr >
+            <td  style="width:120px;"><span id="tab0_title">您现在的IP：</span></td>
+            <th style="font-weight: bolder;" >
+              <div id="tab0_ip">加载中...</div>
+            </th >
+          </tr>
+          <tr>
+            <td  style="width:120px;">所在地理位置：</td>
+            <th style="font-weight: bolder;" >
+             <div id="tab0_address">加载中...</div>
+            </th >
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    var tab0_ip = document.getElementById("tab0_ip");
+    var tab0_address = document.getElementById("tab0_address");
+    var userAgent = navigator.userAgent;
+    var ipPattern = /(?:^|\s)ip(?:4|6(?:\s+ipv6)?)(?:\s|$)/i;
+    if (ipPattern.test(userAgent)) {
+      var match = userAgent.match(/(?:^|\s)ip(?:4|6(?:\s+ipv6)?)(?:\s|$)/i);
+      tab0_ip.innerHTML = "您现在的IP地址是：" + match[0].replace(/^\s+|\s+$/g, '');;
+      tab0_address.innerHTML = "所在地理位置：" + match[1];
+    } else {
+      tab0_ip.innerHTML = "无法获取您的IP地址";
+      tab0_address.innerHTML = "无法获取您的地理位置";
+    }
+  </script>
+</body>
+</html>
